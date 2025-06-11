@@ -1,5 +1,32 @@
-    // Base de dados de frases por tema - conteúdo mais profundo e católico
-        const frasesData = {
+        
+    let audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_4993cb9cd3.mp3?filename=chant-11047.mp3");
+        audio.volume = 0.3;
+    let somAtivo = true;
+
+    const botaoSom = document.createElement("button");
+        botaoSom.innerHTML = "🔊 Som";
+    Object.assign(botaoSom.style, {
+        position: "fixed",
+        bottom: "10px",
+        right: "10px",
+        zIndex: "9999",
+        padding: "8px 12px",
+        fontSize: "14px",
+        backgroundColor: "#f7f9fc",
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        cursor: "pointer"
+    });
+    document.body.appendChild(botaoSom);
+
+    botaoSom.addEventListener("click", () => {
+        somAtivo = !somAtivo;
+        botaoSom.innerHTML = somAtivo ? "🔊 Som" : "🔇 Mudo";
+        if (!somAtivo) audio.pause();
+    });
+
+        
+      const frasesData = {
         castidade: [
             { santo: "Santo Tomás de Aquino", frase: "A castidade é a virtude que ordena e modera o apetite dos prazeres venéreos segundo a reta razão iluminada pela fé" },
             { santo: "Santa Josefina Bakhita", frase: "A pureza de coração é ver Deus em todas as coisas e manter-se limpo para Ele" },
@@ -132,21 +159,45 @@
     };
 
         const imagensSantos = {
-        "Santo Tomás de Aquino": "imagens/santo_tomas_de_aquino.jpg",
-        "Santa Josefina Bakhita": "imagens/santa_josefina_bakhita.jpg",
-        "São João Paulo II": "imagens/sao_joao_paulo_ii.jpg",
-        "Santa Teresa de Ávila": "imagens/santa_teresa_de_avila.jpg",
-        "São Francisco de Sales": "imagens/sao_francisco_de_sales.jpg",
-        "Santa Maria Goretti": "imagens/santa_maria_goretti.jpg",
-        "São João Paulo II": "imagens/sao_joao_paulo_ii.jpg",
-        "Santa Rita de Cássia": "imagens/santa_rita_de_cassia.jpg",
-        "São José": "imagens/sao_jose.jpg",
-        "Santa Teresa de Lisieux": "imagens/santa_teresa_de_lisieux.jpg",
-        "São Bento": "imagens/sao_bento.jpg",
-        "Santa Teresa de Calcutá": "imagens/santa_teresa_de_calcutta.jpg",
-        "São Francisco de Assis": "imagens/sao_francisco_de_assis.jpg",
-        "São Vicente de Paulo": "imagens/sao_vicente_de_paulo.jpg"
-    };
+    "Santo Tomás de Aquino": "imagens/santo_tomas_de_aquino.jpg",
+    "Santa Josefina Bakhita": "imagens/santa_josefina_bakhita.jpg",
+    "São João Paulo II": "imagens/sao_joao_paulo_ii.jpg",
+    "Santa Teresa de Ávila": "imagens/santa_teresa_de_avila.jpg",
+    "São Francisco de Sales": "imagens/sao_francisco_de_sales.jpg",
+    "Santa Maria Goretti": "imagens/santa_maria_goretti.jpg",
+    "Santa Rita de Cássia": "imagens/santa_rita_de_cassia.jpg",
+    "São José": "imagens/sao_jose.jpg",
+    "Santa Teresa de Lisieux": "imagens/santa_teresa_de_lisieux.jpg",
+    "São Bento": "imagens/sao_bento.jpg",
+    "Santa Teresa de Calcutá": "imagens/santa_teresa_de_calcutta.jpg",
+    "São Francisco de Assis": "imagens/sao_francisco_de_assis.jpg",
+    "São Vicente de Paulo": "imagens/sao_vicente_de_paulo.jpg",
+    "Santa Gianna Beretta Molla": "imagens/santa_gianna_beretta_molla.jpg",
+    "São Josemaría Escrivá": "imagens/sao_josemaria_escriva.jpg",
+    "Santa Catarina de Siena": "imagens/santa_catarina_de_siena.jpg",
+    "São Luís Maria Grignion de Montfort": "imagens/sao_luis_maria_grignion_de_montfort.jpg",
+    "São João Batista": "imagens/sao_joao_batista.jpg",
+    "São João da Cruz": "imagens/sao_joao_da_cruz.jpg",
+    "Santo Agostinho": "imagens/santo_agostinho.jpg",
+    "Santa Teresinha": "imagens/santa_teresinha.jpg",
+    "São Padre Pio": "imagens/sao_padre_pio.jpg",
+    "Santa Faustina Kowalska": "imagens/santa_faustina_kowalska.jpg",
+    "São João Evangelista": "imagens/sao_joao_evangelista.jpg",
+    "São João Bosco": "imagens/sao_joao_bosco.jpg",
+    "Santa Gianna Beretta Molla": "imagens/santa_gianna_beretta_molla.jpg",
+    "São Francisco de Sales": "imagens/sao_francisco_de_sales.jpg",
+    "São Vicente de Paulo": "imagens/sao_vicente_de_paulo.jpg"
+};
+
+
+window.addEventListener("load", () => {
+    const temas = Object.keys(frasesData);
+    const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
+    temaAtual = temaAleatorio;
+    modal.style.display = "flex";
+    resetModal();
+    mostrarFrase();
+});
 
         // Elementos do DOM
         const modal = document.getElementById('modal');
@@ -216,6 +267,11 @@
             document.getElementById('imagem-santo').src = imagemSanto;
         }
 
+
+        if (somAtivo) {
+    audio.currentTime = 0;
+    audio.play();
+        }
         loading.style.display = 'none';
         conteudoFrase.style.display = 'block';
         
@@ -254,6 +310,37 @@
                 // Fallback silencioso
             }
         }
+
+        function exibirBotaoCompartilhar(frase) {
+    let btnCompartilhar = document.getElementById('btn-compartilhar');
+    if (!btnCompartilhar) {
+        btnCompartilhar = document.createElement("button");
+        btnCompartilhar.id = "btn-compartilhar";
+        btnCompartilhar.textContent = "Compartilhar";
+        Object.assign(btnCompartilhar.style, {
+            marginTop: "16px",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "6px",
+            background: "#2d89ef",
+            color: "white",
+            fontSize: "14px",
+            cursor: "pointer"
+        });
+        conteudoFrase.appendChild(btnCompartilhar);
+    }
+
+    btnCompartilhar.onclick = () => {
+        const texto = `"${frase.frase}" — ${frase.santo}`;
+        const url = window.location.href;
+        const compartilhar = `${texto}\n\nVeja mais em: ${url}`;
+        navigator.clipboard.writeText(compartilhar).then(() => {
+            btnCompartilhar.textContent = "Copiado!";
+            setTimeout(() => btnCompartilhar.textContent = "Compartilhar", 2000);
+        });
+    };
+}
+
 
        // Adicionar efeito de paralaxe sutil no fundo
        document.addEventListener('mousemove', (e) => {

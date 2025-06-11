@@ -6,16 +6,23 @@
     <title>Frases dos Santos</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMGg4djE2aC04eiIvPgo8Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4=">
+    <link rel="icon" href="data:image/svg+xml;base64,...">
 </head>
 <body>
     <div class="container">
         <h1 class="titulo">Frases dos Santos</h1>
         <p class="subtitulo">Reflexões para o crescimento espiritual</p>
-        
+
+        <!-- Frase do dia -->
+        <div class="frase-do-dia" id="frase-do-dia">
+            <h2>Frase do Dia</h2>
+            <p id="texto-frase-dia"></p>
+            <p><strong id="autor-frase-dia"></strong></p>
+        </div>
+
         <div class="circulo-central">
-            <div class="balao" data-tema="castidade">💒<br>Castidade</div>
-            <div class="balao" data-tema="namoro">💕<br>Namoro<br>Cristão</div>
+            <div class="balao" data-tema="castidade">🚺<br>Castidade</div>
+            <div class="balao" data-tema="namoro">🤞<br>Namoro<br>Cristão</div>
             <div class="balao" data-tema="oracao">🙏<br>Oração</div>
             <div class="balao" data-tema="nossa-senhora">🌹<br>Nossa<br>Senhora</div>
             <div class="balao" data-tema="eucaristia">🍞<br>Eucaristia</div>
@@ -28,27 +35,29 @@
     <div class="modal" id="modal">
         <div class="modal-content">
             <span class="fechar" id="fechar">&times;</span>
-            
             <div class="inicial" id="inicial">
                 <h2><span id="tema-escolhido"></span></h2>
                 <button class="btn-ver-frase" id="btn-ver-frase">Ver Frase Santa</button>
             </div>
-            
             <div class="loading" id="loading">
                 <div class="spinner"></div>
                 <p>Buscando uma palavra de sabedoria... </p>
             </div>
-            
             <div class="conteudo-frase" id="conteudo-frase">
                 <div class="cruz-decoration">✝</div>
-                <img class="imagem-santo" id="imagem-santo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNmN2Y5ZmMiIHN0cm9rZT0iI2UyZThmMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxzdmcgeD0iMjAiIHk9IjIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY3ZWVhIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KPHA+PHBhdGggZD0ibTEyIDMtMS45MTIgNS44MTNhMiAyIDAgMCAxLTEuMyAxLjI3TDMgMTJsNS44MTMgMS45MTJhMiAyIDAgMCAxIDEuMjcgMS4zTDEyIDIxbDEuOTEyLTUuODEzYTIgMiAwIDAgMSAxLjMtMS4yN0wyMSAxMmwtNS44MTMtMS45MTJhMiAyIDAgMCAxLTEuMjctMS4zTDEyIDN6Ii8+PC9wPgo8L3N2Zz4KPC9zdmc+" alt="Santo">
+                <img class="imagem-santo" id="imagem-santo" src="" alt="Santo">
                 <h3 class="nome-santo" id="nome-santo"></h3>
                 <p class="frase-santo" id="frase-santo"></p>
                 <button class="btn-nova-frase" id="btn-nova-frase">Nova Frase</button>
+                <button class="btn-compartilhar" id="btn-compartilhar">Compartilhar</button>
             </div>
         </div>
     </div>
- 
+
+    <!-- Áudio -->
+    <audio id="audio-frase" src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_e7bc5e0bb7.mp3?filename=angelic-choir-ambient-meditation-12466.mp3"></audio>
+    <button id="btn-mute" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">🔊 Som</button>
+
     <script src="script.js"></script>
 </body>
 </html>
