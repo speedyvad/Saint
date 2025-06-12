@@ -4,7 +4,7 @@
     let somAtivo = true;
 
     const botaoSom = document.createElement("button");
-        botaoSom.innerHTML = "🔊 Som";
+    
     Object.assign(botaoSom.style, {
         position: "fixed",
         bottom: "10px",
@@ -19,13 +19,7 @@
     });
     document.body.appendChild(botaoSom);
 
-    botaoSom.addEventListener("click", () => {
-        somAtivo = !somAtivo;
-        botaoSom.innerHTML = somAtivo ? "🔊 Som" : "🔇 Mudo";
-        if (!somAtivo) audio.pause();
-    });
-
-        
+   
       const frasesData = {
         castidade: [
             { santo: "Santo Tomás de Aquino", frase: "A castidade é a virtude que ordena e modera o apetite dos prazeres venéreos segundo a reta razão iluminada pela fé" },
@@ -278,6 +272,9 @@ window.addEventListener("load", () => {
         // Efeito suave da cruz
         adicionarCruz();
     }, 1800);
+
+    exibirBotaoCompartilhar(fraseAleatoria);
+
     }
 
         function adicionarCruz() {
@@ -330,7 +327,7 @@ window.addEventListener("load", () => {
         conteudoFrase.appendChild(btnCompartilhar);
     }
 
-    btnCompartilhar.onclick = () => {
+ btnCompartilhar.onclick = () => {
         const texto = `"${frase.frase}" — ${frase.santo}`;
         const url = window.location.href;
         const compartilhar = `${texto}\n\nVeja mais em: ${url}`;
@@ -338,13 +335,49 @@ window.addEventListener("load", () => {
             btnCompartilhar.textContent = "Copiado!";
             setTimeout(() => btnCompartilhar.textContent = "Compartilhar", 2000);
         });
+
+        if (navigator.share) {
+    navigator.share({
+        title: 'Frase de Santo',
+        text: texto,
+        url: url
+    });
+} else {
+    navigator.clipboard.writeText(compartilhar).then(() => {
+        btnCompartilhar.textContent = "Copiado!";
+        setTimeout(() => btnCompartilhar.textContent = "Compartilhar", 2000);
+    });
+}
     };
 }
 
 
-       // Adicionar efeito de paralaxe sutil no fundo
-       document.addEventListener('mousemove', (e) => {
+ // paralax
+ document.addEventListener('mousemove', (e) => {
             const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
             const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
             document.body.style.backgroundPosition = `${moveX}px ${moveY}px`;
         });
+
+document.addEventListener('click', function tocarAudio() {
+    const audio = document.getElementById('audio-frase');
+    if (audio && audio.paused) {
+        audio.play();
+    }
+    document.removeEventListener('click', tocarAudio);
+});
+
+const audioFrase = document.getElementById('audio-frase');
+const btnMute = document.getElementById('btn-mute');
+
+btnMute.addEventListener('click', () => {
+    if (audioFrase.muted || audioFrase.paused) {
+        audioFrase.muted = false;
+        audioFrase.play();
+        btnMute.textContent = "🔊 Som";
+    } else {
+        audioFrase.muted = true;
+        audioFrase.pause();
+        btnMute.textContent = "🔇 Mudo";
+    }
+});

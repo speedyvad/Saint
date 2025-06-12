@@ -66,7 +66,7 @@ body::before {
 .frase-do-dia {
     position: absolute;
     top: 20%;
-    left: 50%;
+    left: 40%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
